@@ -1,0 +1,29 @@
+<div class="ui equal width grid">
+    <div class="column margem30">
+        <form class="ui small form" name="usuarioCadastroForm" ng-submit="cadastrar(usuarioCadastro)">
+            <div class="field">
+                <input placeholder="Nome" ng-model="usuarioCadastro.nome" ng-required="true">
+            </div>
+            <div class="field">
+                <input placeholder="Login" ng-model="usuarioCadastro.login" ng-required="true">
+            </div>
+            <div class="field">
+                <input placeholder="Senha" ng-model="usuarioCadastro.senha" ng-required="true" type="password">
+            </div>
+            <button class="ui button" style="margin: 2px">Cadastrar</button>
+        </form>
+    </div>
+    
+    <div class="column margem30">
+        <form class="ui small form" name="usuarioLoginForm" ng-submit="autenticar(usuarioLogin)">
+            <div class="field">
+                <input placeholder="Login" ng-model="usuarioLogin.login" ng-required="true">
+            </div>
+            <div class="field">
+                <input placeholder="Senha" ng-model="usuarioLogin.senha" ng-required="true" type="password">
+            </div>
+            <button class="ui button" style="margin: 2px">Login</button>
+        </form>
+        <div class="ui yellow message" ng-show="erroLogin.length > 0">{{erroLogin}}</div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="ui grid">
+        <div class="row">
+
+            <div class="one wide column"></div>
+
+            <div class="fourteen wide column caixa-grande margem30">
+                <div class="ui grid">
+                        <div class="row">
+                                <div class="four wide column">
+                                        <div class="ui inverted segment pregada">
+                                            <img class="ui medium rounded image" src="{{artista.imagem}}" >
+                                        </div>
+                                </div>
+                                <div class="seven wide column">
+                                        <div class="ui segment" style="background-color: transparent; border: none; box-shadow: none;">
+                                                <h2>{{artista.nome}}</h2>
+                                        </div>
+                                        <div class="ui segment" style="background-color: transparent; border: none; box-shadow: none;" ng-hide="musica == null">
+                                           Última música escutada: {{musica.nome}}
+                                        </div>
+                                        <div class="ui segment" style="background-color: transparent; border: none; box-shadow: none;">
+                                                <table class="ui inverted table" ng-show="albunsDoArtista.length > 0">
+                                                    <thead>
+                                                        <tr>
+                                                        <th>Albuns</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="album in albunsDoArtista">
+                                                          <td>{{album.nome}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                </div>
+                                <div class="five wide column">
+                                        <div class="ui segment" style="background-color: transparent; border: none; box-shadow: none;"> 
+                                                <button class="ui olive button" ng-hide="ehFavorito" ng-click="adicionarArtistaAosFavoritos()">Adicionar artista aos favoritos</button>
+                                                <button class="ui yellow button" ng-show="ehFavorito" ng-click="excluirArtistaDosFavoritos()">Remover artista dos favoritos</button>
+                                        </div>
+                                        <div class="ui segment" style="background-color: transparent; border: none; box-shadow: none;"> 
+                                                <form class="ui action input fluid" ng-submit="adicionarNotaAoArtista(notaDada)"> 
+                                                    <input ng-model="notaDada" type="text" placeholder="Nota do artista">
+                                                    <button class="ui button">Dar nota</button>
+                                                </form>
+                                        </div>
+                                        <div class="ui segment" style="background-color: transparent; border: none; box-shadow: none;">
+                                                <form class="ui action input fluid" ng-submit="adicionarUltimaMusicaEscutada(musicaDada)"> 
+                                                    <select class="ui dropdown" id="select" ng-model="musicaDada" ng-options="musica.nome for musica in musicas" >
+                                                        <option value="">Ultima música escutada</option>
+                                                        {{musica}}
+                                                    </select>
+                                                    <button class="ui button">Adicionar</button>
+                                                </form>
+                                        </div>
+                                        <div class="ui segment" style="background-color: transparent; border: none; box-shadow: none;" ng-hide="nota == null"> 
+                                                Nota do artista: {{nota}}
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>

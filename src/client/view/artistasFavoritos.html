@@ -1,0 +1,48 @@
+<div class="ui grid">
+    
+        <div class="row">
+
+            <div class="four wide column"></div>
+
+            <div class="eight wide column caixa-grande margem30">
+                <h2>Seus artistas favoritos</h2>
+
+                <div class="ui olive message" ng-show="artistasFavoritos.length == 0">Você não tem artistas favoritos</div>
+
+                <table ng-show="artistasFavoritos.length > 0" class="ui selectable inverted table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Artista</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="artista in artistasFavoritos">
+                                <td><img src="{{artista.imagem}}" class="ui tiny rounded image"></td>
+                                <td>{{artista.nome}}</td>
+                                <td>
+                                        <a ui-sref="artista({idArtista: artista.id})">
+                                            <button class="ui grey button">Ver artista</button>
+                                        </a>
+                                </td>
+                                <td>
+                                    <button ng-click="mostrarOpcoesExcluir = true" class="ui grey button" ng-hide="mostrarOpcoesExcluir">Excluir artista dos favoritos</button> 
+                                    <div class="ui black message" ng-show="mostrarOpcoesExcluir" style="margin-top: 0px; padding: 5px; text-align: center">
+                                        Deseja excluir esse artista dos favoritos?
+                                        <div class="ui equal width grid" style="margin-bottom: 5px">
+                                            <div class="column"><button class="ui inverted basic button" ng-click="excluirArtista(artista.id)">Sim</button></div>
+                                            <div class="column"><button class="ui inverted basic button" ng-click="mostrarOpcoesExcluir = false">Não</button></div>                                                     
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+
+            <div class="four wide column"></div>
+
+        </div>
+</div>

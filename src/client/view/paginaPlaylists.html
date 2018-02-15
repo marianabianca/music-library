@@ -1,0 +1,45 @@
+<div class="ui grid">
+        <div class="row">
+
+            <div class="four wide column"></div>
+
+            <div class="eight wide column caixa-grande margem30">
+                <h2>Suas playlists</h2>
+
+                <div class="ui olive message" ng-show="playlists.length == 0">Você não tem playlists</div>
+
+                <table ng-show="playlists.length > 0" class="ui selectable inverted table">
+                        <thead>
+                            <tr>
+                                <th>Playlist</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="playlist in playlists">
+                                <td>{{playlist.nome}}</td>
+                                <td>
+                                        <a ui-sref="musicasPlaylist({idPlaylist: playlist.id})">
+                                            <button class="ui grey button">Ver músicas</button>
+                                        </a>
+                                </td>
+                                <td>
+                                        <button ng-click="mostrarOpcoesExcluir = true" class="ui grey button" ng-hide="mostrarOpcoesExcluir">Excluir playlist</button> 
+                                        <div class="ui black message" ng-show="mostrarOpcoesExcluir" style="margin-top: 0px; padding: 5px; text-align: center">
+                                            Deseja excluir essa playlist?
+                                            <div class="ui equal width grid" style="margin-bottom: 5px">
+                                                <div class="column"><button class="ui inverted basic button" ng-click="excluirPlaylist(playlist)">Sim</button></div>
+                                                <div class="column"><button class="ui inverted basic button" ng-click="mostrarOpcoesExcluir = false">Não</button></div>                                                     
+                                            </div>
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+
+            <div class="four wide column"></div>
+
+        </div>
+</div>

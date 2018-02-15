@@ -1,0 +1,159 @@
+<div class="barra-topo">
+    <button class="ui button" ng-click="logout()">logout</button>
+</div>
+
+<div class="caixa-grande">
+    
+    <div class="ui equal width grid">
+        
+        <div class="column margem30">
+            <h4>Adicionar artista</h4>
+            <form class="ui small form" name="artistaForm" ng-submit="adicionarArtistaAoSistema(artistaCriado)">
+                <div class="field">
+                    <input placeholder="Nome do artista" ng-model="artistaCriado.nome" ng-required="true">
+                </div>
+                <div class="field">
+                    <input placeholder="Link para imagem do artista" ng-model="artistaCriado.imagem" ng-required="true">
+                </div>
+                <button class="ui button" style="margin: 2px">Adicionar artista</button>
+            </form>
+            <div class="ui yellow message" ng-show="artistaJaExiste">Já foi cadastrado um artista com este nome no sistema.</div>
+        </div>
+        
+        <div class="column margem30">
+            <h4>Adicionar música</h4>               
+            <form class="ui small form" name="musicaForm" ng-submit="adicionarMusicaAoSistema(musica)">
+                <div class="field">
+                    <input placeholder="Título" ng-model="musica.nome" ng-required="true">
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <select class="ui dropdown" id="select" ng-model="musica.artista" ng-options="artista.nome for artista in artistas" >
+                            <option value="">Selecionar artista</option>
+                            {{artista}}
+                        </select>
+                    </div>
+                    <div class="field">
+                        <input placeholder="Álbum" ng-model="musica.album.nome" ng-required="true">
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <input placeholder="Ano de lançamento" ng-model="musica.anoDeLancamento" ng-required="true">
+                    </div>
+                    <div class="field">
+                        <input placeholder="Tempo de duração" ng-model="musica.duracao" ng-required="true">
+                    </div>
+                </div>
+                <button class="ui button" style="margin: 2px">Adicionar musica</button>
+            </form>
+            <div class="ui yellow message" ng-show="musicaJaExiste">Música com mesmo nome e álbum já foi cadastrada no sistema.</div>
+        </div>
+
+        
+        <div class="column margem30">
+            <h4>Criar playlist</h4>
+            <form class="ui small form" name="artistaForm" ng-submit="criarPlaylist(playlist)">
+                    <div class="field">
+                        <input placeholder="Link para imagem do artista" ng-model="playlist.nome" ng-required="true">
+                    </div>
+                    <button class="ui button" style="margin: 2px">Criar playlist</button>
+                    <div class="ui yellow message" ng-show="playlistJaExiste">Playlist com o mesmo nome já existe no sistema.</div>
+            </form>
+            
+        </div>
+
+    </div>
+    
+</div>
+
+<div class="barra-topo maior">
+        <div class="ui equal width grid">
+                <div class="column margem-lados">
+                     <a ui-sref="artistasFavoritos">
+                        <button class="ui button" style="margin: 2px">Artistas Favoritos</button>
+                    </a>
+                </div>
+                <div class="column margem-lados">
+                        <a ui-sref="playlists">
+                            <button class="ui button" style="margin: 2px">Ver playlists</button>
+                        </a>
+                </div>
+        </div>
+</div>
+
+<div class="caixa-grande-transparente">
+    
+    <div class="ui equal width grid">
+    
+        <div class="column margem30">
+            <form class="ui action input fluid" ng-submit="fazerBusca(caracteristica)" ng-show="artistas.length > 0"> 
+              <input ng-model="caracteristica" type="text" placeholder="Nome do artista">
+              <button class="ui button">Pesquisar artista</button>
+            </form>
+
+            <table ng-show="artistas.length > 0" class="ui selectable inverted table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nome</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="artista in artistas | filter: {nome:filtro}">
+                        <td><img src="{{artista.imagem}}" class="ui tiny rounded image"></td>
+                        <td>{{artista.nome}}</td>
+                        <td>
+                            <a ui-sref="artista({idArtista: artista.id})">
+                                <button class="ui grey button">Ver artista</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="column margem30">
+            <form class="ui action input fluid" ng-submit="fazerBuscaMusica(caracteristicaMusica)" ng-show="musicas.length > 0"> 
+              <input ng-model="caracteristicaMusica" type="text" placeholder="Título da música">
+              <button class="ui button">Pesquisar música</button>
+            </form>
+
+            <table ng-show="musicas.length > 0" class="ui selectable inverted table">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Artista</th>
+                        <th>Álbum</th>
+                        <th>Adicionar a uma playlist</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="musica in musicas | filter: {nome:filtroMusica}">
+                        <td>{{musica.nome}}</td>
+                        <td>{{musica.artista.nome}}</td>
+                        <td>{{musica.album.nome}}</td>
+                        <td>
+                            <select name="gender" class="ui dropdown" id="select" ng-model="playlist" ng-options="playlist.nome for playlist in playlists" >
+                                <option value="">Selecionar playlist</option>
+                            </select>
+                            {{nomePlaylist}}
+                        </td>
+                        <td>
+                                <button ng-click="adicionarMusicaAPlaylist(musica, playlist)" class="ui grey button" style="
+                                    font-size: 20px;
+                                    padding-top: 5px;
+                                    padding-bottom: 5px;
+                                ">+</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>    
+        </div>
+        
+    </div>
+    
+</div>

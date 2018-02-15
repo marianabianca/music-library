@@ -1,0 +1,44 @@
+<div class="ui grid">
+        <div class="row">
+
+            <div class="four wide column"></div>
+
+            <div class="eight wide column caixa-grande margem30">
+                <h2>{{nomePlaylist}}</h2>
+
+                <div class="ui olive message" ng-show="musicas.length == 0">Você não tem músicas nessa playlist.</div>
+
+                <table ng-show="musicas.length > 0" class="ui selectable inverted table">
+                        <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Artista</th>
+                                    <th>Álbum</th>
+                                    <th></th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="musica in musicas">
+                                <td>{{musica.nome}}</td>
+                                <td>{{musica.artista.nome}}</td>
+                                <td>{{musica.album.nome}}</td>
+                                <td>
+                                        <button ng-click="mostrarOpcoesExcluir = true" class="ui grey button" ng-hide="mostrarOpcoesExcluir">Excluir música da playlist</button> 
+                                        <div class="ui black message" ng-show="mostrarOpcoesExcluir" style="margin-top: 0px; padding: 5px; text-align: center">
+                                            Deseja excluir essa música da playlist?
+                                            <div class="ui equal width grid" style="margin-bottom: 5px">
+                                                <div class="column"><button class="ui inverted basic button" ng-click="excluirMusica(idPlaylist, musica.id)">Sim</button></div>
+                                                <div class="column"><button class="ui inverted basic button" ng-click="mostrarOpcoesExcluir = false">Não</button></div>                                                     
+                                            </div>
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+
+            <div class="four wide column"></div>
+
+        </div>
+    
+</div>

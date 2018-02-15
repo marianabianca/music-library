@@ -1,0 +1,1 @@
+angular.module("lab1", ["ui.router"]);

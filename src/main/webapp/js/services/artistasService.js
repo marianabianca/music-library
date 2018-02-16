@@ -14,15 +14,15 @@ angular.module("lab1").factory("artistasService", function (albunsService, $http
     };
     
     var adicionarArtistaAoSistema = function (artista) {
-        return $http.post('http://localhost:8080/artistas', artista)
+        return $http.post('/artistas', artista)
     };
     
     var getArtista = function (idArtista) {
-        return $http.get('http://localhost:8080/artistas/' + idArtista);
+        return $http.get('/artistas/' + idArtista);
     };
     
     var getArtistas = function () {
-        return $http.get('http://localhost:8080/artistas');
+        return $http.get('/artistas');
     }
     
     return {

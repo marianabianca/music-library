@@ -19,11 +19,11 @@ angular.module("lab1").factory("musicasService", function (albunsService, $http)
     };
     
     var adicionarMusicaAoSistema = function (musica) {
-        return $http.post('http://localhost:8080/musicas', musica);
+        return $http.post('/musicas', musica);
     };
     
     var getMusicas = function () {
-        return $http.get('http://localhost:8080/musicas');
+        return $http.get('/musicas');
     }
     
     return {

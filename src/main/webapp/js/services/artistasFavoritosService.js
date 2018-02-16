@@ -14,11 +14,11 @@ angular.module("lab1").factory("artistasFavoritosService", function ($http) {
     };
 
     var excluirArtista = function (idArtista) {  
-        return $http.delete('http://localhost:8080/artistas/favoritos/' + idArtista);
+        return $http.delete('/artistas/favoritos/' + idArtista);
     }
     
     var getArtistasFavoritos = function () {
-        return $http.get('http://localhost:8080/artistas/favoritos');
+        return $http.get('/artistas/favoritos');
     }
     
     return {

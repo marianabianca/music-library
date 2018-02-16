@@ -5,7 +5,7 @@ angular.module("lab1").controller("loginCtrl", function ($scope, $http, $locatio
     $scope.erroCadastro;
     
     $scope.cadastrar = function (usuario) {
-        $http.post("http://localhost:8080/cadastra", usuario).then(function(reponse) {
+        $http.post("/cadastra", usuario).then(function(reponse) {
                 $scope.erroCadastro = null;
             }).catch(function(response) {
                 $scope.erroCadastro = response.data.message;
@@ -15,7 +15,7 @@ angular.module("lab1").controller("loginCtrl", function ($scope, $http, $locatio
     }
     
     $scope.autenticar = function (usuario) {
-        $http.post("http://localhost:8080/autenticar", usuario).then(function(response){
+        $http.post("/autenticar", usuario).then(function(response){
             $scope.token = response.data.token;
             $window.sessionStorage.token = $scope.token;
             $scope.erroLogin = null;

@@ -14,7 +14,7 @@ angular.module("lab1").factory("playlistsService", function ($http) {
     }
 
     var criarPlaylist = function (nomePlaylist) {
-        return $http.post('http://localhost:8080/playlists', nomePlaylist);
+        return $http.post('/playlists', nomePlaylist);
     };
 
     var temMusica = function (musica, playlist) {
@@ -30,11 +30,11 @@ angular.module("lab1").factory("playlistsService", function ($http) {
     }
 
     var adicionarMusicaAPlaylist = function (musica, playlist) {
-        $http.post('http://localhost:8080/playlists/' + playlist.id + '/adicionar-musica/' + musica.id);
+        $http.post('/playlists/' + playlist.id + '/adicionar-musica/' + musica.id);
     }
 
     var getPlaylist = function (idPlaylist) {        
-        return $http.get('http://localhost:8080/playlists/' + idPlaylist);
+        return $http.get('/playlists/' + idPlaylist);
     }
 
     var getMusicas = function (nomePlaylist) {
@@ -44,15 +44,15 @@ angular.module("lab1").factory("playlistsService", function ($http) {
     }
 
     var excluirPlaylist = function (playlistAux) {        
-        return $http.delete('http://localhost:8080/playlists/' + playlistAux.id);
+        return $http.delete('/playlists/' + playlistAux.id);
     }
 
     var excluirMusicaDaPlaylist = function (idPlaylist, idMusica) {  
-        return $http.delete('http://localhost:8080/playlists/' + idPlaylist + '/remover-musica/' + idMusica);
+        return $http.delete('/playlists/' + idPlaylist + '/remover-musica/' + idMusica);
     }
     
     var getPlaylists = function () {
-        return $http.get('http://localhost:8080/playlists');
+        return $http.get('/playlists');
     }
 
     return {

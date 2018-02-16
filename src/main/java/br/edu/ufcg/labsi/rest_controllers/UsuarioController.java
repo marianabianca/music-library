@@ -18,11 +18,11 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @PostMapping("/cadastra")
-    public ResponseEntity<Usuario> cadastraUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> cadastraUsuario(@RequestBody Usuario usuario) throws ServletException {
         String login = usuario.getLogin();
 
         if (this.usuarioRepository.existsUsuarioByLogin(login)) {
-            return new ResponseEntity<>(usuario, HttpStatus.CONFLICT);
+            throw new ServletException("Login ja existente, tente outro");
         }
 
         usuario = this.usuarioRepository.save(usuario);
@@ -37,7 +37,7 @@ public class UsuarioController {
 
         if (!this.usuarioRepository.existsUsuarioByLogin(login) ||
                 !this.usuarioRepository.getUsuarioByLogin(login).getSenha().equals(senha)) {
-            throw new ServletException("usuario ou senha invalidos");
+            throw new ServletException("Usuario ou senha invalidos");
         }
 
         Token token = this.gerarToken(login);
@@ -54,16 +54,6 @@ public class UsuarioController {
         Token token = new Token(tokenString);
 
         return token;
-    }
-
-    @PostMapping("/teste")
-    public Object teste(@RequestHeader("Authorization") String autoriza) {
-        String token = autoriza.substring(7);
-        String login = (String) Jwts.parser().setSigningKey("chocolate").parseClaimsJws(token).getBody().get("login");
-
-        System.out.println("login " + login);
-
-        return null;
     }
 
     private class Token{

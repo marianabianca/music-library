@@ -1,3 +1,7 @@
+<div class="barra-topo" style="color: white; text-align: center; font-size: 20px; padding: 10px">
+    MUSIC  LIBRARY
+</div>
+
 <div class="ui equal width grid">
     <div class="column margem30">
         <form class="ui small form" name="usuarioCadastroForm" ng-submit="cadastrar(usuarioCadastro)">
@@ -11,6 +15,7 @@
                 <input placeholder="Senha" ng-model="usuarioCadastro.senha" ng-required="true" type="password">
             </div>
             <button class="ui button" style="margin: 2px">Cadastrar</button>
+            <div class="ui yellow message" ng-show="erroCadastro.length > 0">{{erroCadastro}}</div>
         </form>
     </div>
     

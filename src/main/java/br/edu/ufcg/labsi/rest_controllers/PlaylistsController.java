@@ -41,9 +41,11 @@ public class PlaylistsController {
     }
 
     @DeleteMapping("/{id}")
-    public Iterable<Playlist> deletarPlaylist(@PathVariable Integer id) {
+    public Iterable<Playlist> deletarPlaylist(@RequestHeader("Authorization") String autorizacao,
+                                              @PathVariable Integer id) {
+        Usuario usuario = this.util.getUsuario(autorizacao);
         this.playlistsRepository.delete(id);
-        Iterable<Playlist> playlists = this.playlistsRepository.findAll();
+        Iterable<Playlist> playlists = this.playlistsRepository.getPlaylistsByUsuario(usuario);
         return playlists;
     }
 
